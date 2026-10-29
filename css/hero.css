@@ -1,0 +1,379 @@
+/* Первый экран. Две раскладки: постер (по умолчанию, без JS, слабые устройства, reduced-motion) и 3D (html[data-hero="3d"], спека раздел 14, v8). */
+.hero{position:relative;padding-top:calc(var(--header-h) + var(--head-gap))}
+.hero__stage{display:grid;grid-template-areas:"type" "sub" "cta" "urgent" "poster" "where";padding-bottom:var(--block-gap);align-content:start}
+.hero__copy{display:contents}
+.hero h1{font-size:clamp(2rem,.5rem + 4vw,4.75rem);line-height:.95;font-weight:200;text-transform:uppercase;letter-spacing:-.03em;text-wrap:balance}
+.hero__type{grid-area:type}
+.hero .lead{grid-area:sub;margin-top:var(--space-5);font-weight:400;max-width:36ch;text-wrap:balance}
+@media(min-width:64em){.hero .lead{font-weight:300}}
+.hero__cta{grid-area:cta;display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-4);align-items:center;margin-top:var(--space-6)}
+.hero__cta .btn{width:100%}
+.where{grid-area:where;display:flex;gap:8px;align-items:flex-start;margin-top:24px;color:var(--text-muted);font-size:var(--fs-small)}
+.where .ic{font-size:20px;margin-top:1px}
+.hero__urgent{grid-area:urgent;display:flex;gap:12px;align-items:flex-start;margin-top:var(--space-5);padding:12px var(--note-pad);background:var(--danger-tint);border-radius:var(--r-m);font-size:var(--fs-small);line-height:1.45}
+.hero__urgent .ic{font-size:20px;color:var(--danger);margin-top:1px}
+.hero__urgent a{color:var(--danger);font-weight:560}
+.hero__poster{grid-area:poster;margin-top:24px;justify-self:center;width:100%;max-width:520px}
+.hero__poster img{display:block;width:100%;height:auto}
+.hero__poster figcaption{margin-top:8px;font-size:var(--fs-small);color:var(--text-muted)}
+.hero__read,.hero__edge,.hero__doc,.hero__ticket,.hero__canvas{display:none}
+.js-ready .hero .line>span{animation:rise .9s var(--ease-out-quint) both;animation-delay:calc(var(--i,0)*90ms)}
+.js-ready .hero__copy>*,.js-ready .hero__urgent{animation:fade .56s var(--ease-out-quint) both;animation-delay:var(--d,240ms)}
+.hero__cta{--d:320ms}.where{--d:400ms}.hero__urgent{--d:480ms}
+
+@media(min-width:860px){
+  .hero__stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto auto 1fr auto;grid-template-areas:"type poster" "sub poster" "cta poster" "where poster" ". poster" "urgent urgent";column-gap:var(--gutter);align-items:start}
+  .hero__poster{margin-top:0;max-width:560px;justify-self:end}
+  .hero__cta .btn{width:auto}
+  .hero__urgent{margin-top:var(--space-7);font-size:1rem;align-items:center;min-height:56px}
+}
+
+/* ---------- 3D ---------- */
+html[data-hero="3d"] .hero{height:600vh;height:600svh;padding:0}
+@media(max-width:767.98px){html[data-hero="3d"] .hero{height:520vh;height:520svh}}
+html[data-hero="3d"] .hero__stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:block;padding:0;background:linear-gradient(180deg,var(--base),var(--base-2));width:100%;max-width:none}
+html[data-hero="3d"] .hero__poster{display:none}
+html[data-hero="3d"] .hero__type{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 3vw;z-index:3;pointer-events:none}
+html[data-hero="3d"] .hero h1{font-size:clamp(34px,min(10.4vw,17svh),176px);line-height:.92}
+html[data-hero="3d"] .hero__copy{display:flex;flex-direction:column;align-items:center;text-align:center;position:absolute;left:0;right:0;top:calc(50% + 15svh);z-index:3;padding:0 var(--page-x)}
+html[data-hero="3d"] .hero .lead{margin:0;font-size:clamp(1rem,.6rem + 1vw,1.375rem);line-height:1.4}
+html[data-hero="3d"] .hero__cta{justify-content:center;margin-top:2svh}
+html[data-hero="3d"] .where{margin-top:1.6svh;font-size:var(--fs-small);justify-content:center;text-align:left}
+html[data-hero="3d"] .hero__canvas{display:block;position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0}
+html[data-hero="3d"] .hero__urgent{position:absolute;left:var(--page-x);bottom:4svh;margin:0;z-index:3;max-width:34ch;font-size:var(--fs-small);line-height:1.35;padding:10px 12px}
+html[data-hero="3d"] .hero__read{display:flex;flex-direction:column;align-items:center;gap:2px;position:absolute;left:calc(var(--page-x) + 38ch);right:calc(min(250px,44vw) + clamp(8px,2vw,28px) + 16px);bottom:4.5svh;text-align:center;z-index:3;color:var(--text-muted);font:400 var(--fs-small)/1.4 var(--font-sans);pointer-events:none;text-wrap:balance}
+.hero__read b{display:block;color:var(--text);font:400 .875rem/1.4 var(--font-mono);letter-spacing:.01em}
+.hero__read{opacity:0}
+html[data-hero="3d"] .hero__edge{display:block;position:absolute;left:var(--page-x);top:50%;transform:translateY(-50%);z-index:3;max-width:min(34vw,520px);pointer-events:none;opacity:0}
+@media(max-width:1023.98px){html[data-hero="3d"] .hero__edge{max-width:36vw}}
+/* заголовок этапа (15.13.1): второй крупный текст экрана после H1; строки режет hero-3d.js */
+.hero__edge .n{display:block;font:400 .875rem/1.4 var(--font-mono);color:var(--text);letter-spacing:.04em}
+.hero__edge .t{display:block;margin-top:var(--space-3);max-width:13ch;font-size:clamp(2.5rem,4.33vw,4.5rem);line-height:1.04;font-weight:300;font-variation-settings:"SHRP" 40;letter-spacing:-.025em;color:var(--text);text-wrap:balance}
+.hero__edge .t .line>span{white-space:nowrap}
+.hero__edge .t .line+.line{margin-top:-.18em}
+.hero__edge small{display:block;max-width:36ch;margin-top:var(--space-4);font-size:var(--fs-body);line-height:1.4;font-weight:400;color:var(--text-muted)}
+/* угломер (15.13.2): SVG и число создаёт hero-3d.js */
+:root{--gauge:color-mix(in srgb,var(--text) 45%,transparent)}
+:root[data-theme=dark]{--gauge:color-mix(in srgb,var(--text) 55%,transparent)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--gauge:color-mix(in srgb,var(--text) 55%,transparent)}}
+.hero__gauge{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible;opacity:0}
+.hero__gauge path{fill:none;stroke:var(--gauge);stroke-dasharray:1}
+.hero__gauge .gt{stroke-width:1.5}.hero__gauge .ga{stroke-width:1}
+.hero__gauge .gr{stroke:var(--accent);stroke-width:2;stroke-linecap:round}
+.hero__gauge circle{fill:var(--accent)}
+.hero__deg{position:absolute;left:0;top:0;z-index:3;pointer-events:none;opacity:0;white-space:nowrap;color:var(--text);font:400 clamp(2.25rem,1.6rem + 1.2vw,2.75rem)/1 var(--font-mono);font-variant-numeric:tabular-nums}
+html[data-hero="3d"] .hero__doc{display:block;position:absolute;right:var(--page-x);top:96px;z-index:3;width:min(190px,15vw);pointer-events:none;opacity:0}
+.hero__doc .frame{aspect-ratio:4/5;border:1px dashed var(--line-strong);border-radius:var(--r-m);display:grid;place-items:center;padding:8px;text-align:center;font-size:var(--fs-small);color:var(--text-muted);background:color-mix(in srgb,var(--paper) 70%,transparent)}
+.hero__doc b{display:block;margin-top:10px;font-size:.9375rem;font-weight:560}.hero__doc span{font-size:var(--fs-small);color:var(--text-muted)}
+html[data-hero="3d"] .hero__ticket{display:block;position:absolute;right:clamp(8px,2vw,28px);bottom:0;width:min(250px,44vw);z-index:4;background:var(--paper);color:var(--text);padding:14px 14px 18px;pointer-events:none;
+  font:400 .75rem/1.45 var(--font-mono);--printed:0;transition:transform .2s var(--ease-out-cubic),opacity .2s;
+  transform:translateY(calc(100% - 36px - (100% - 36px) * var(--printed) / 6));
+  --m:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) 50%/8px 100%;-webkit-mask:var(--m);mask:var(--m)}
+.hero__ticket i{font-style:normal;color:var(--text-muted)}
+
+/* телефон и узкие окна в 3D: колено ниже и меньше (сдвиг камеры в hero-3d.js), заголовок вверху, подписи внизу */
+@media(max-width:859.98px){
+  /* дымка: кости уходят в фон над текстом и под подписями, колено остаётся в середине экрана */
+  html[data-hero="3d"] .hero__stage::before,html[data-hero="3d"] .hero__stage::after{content:"";position:absolute;left:0;right:0;pointer-events:none}
+  html[data-hero="3d"] .hero__stage::before{top:0;z-index:3;height:var(--fog-h,45%);background:linear-gradient(var(--base) 72%,transparent);opacity:var(--fog,1)}
+  html[data-hero="3d"] .hero__stage::after{bottom:0;z-index:2;height:19rem;background:linear-gradient(transparent,var(--base-2) 70%)}
+  html[data-hero="3d"] .hero__type,html[data-hero="3d"] .hero__copy{z-index:4}
+  html[data-hero="3d"] .hero__type{align-items:flex-start;padding-top:calc(var(--header-h) + 20px)}
+  html[data-hero="3d"] .hero h1{font-size:clamp(30px,10.4vw,80px);line-height:.95}
+  html[data-hero="3d"] .hero__copy{top:calc(var(--header-h) + 20px + 2.2 * clamp(30px,10.4vw,80px) + 14px)}
+  html[data-hero="3d"] .hero .lead{font-size:.9375rem;max-width:34ch}
+  html[data-hero="3d"] .hero__cta{margin-top:12px;gap:0 20px}
+  html[data-hero="3d"] .hero__cta .btn{width:auto;min-height:48px;padding:0 20px}
+  html[data-hero="3d"] .where{display:none}
+  html[data-hero="3d"] .hero__urgent{left:8px;right:8px;max-width:none;bottom:8px;background:var(--danger-tint)}
+  html[data-hero="3d"] .hero__read{left:0;right:0;bottom:calc(8px + 5.6rem);padding:0 var(--page-x);font-size:.875rem;line-height:1.35}
+  html[data-hero="3d"] .hero__edge{top:auto;bottom:calc(8px + 5.6rem + var(--read-h,3.6rem) + 12px);transform:none;max-width:calc(100vw - 2*var(--page-x) - 72px)}
+  html[data-hero="3d"] .hero__edge .t{margin-top:var(--space-2);max-width:none;font-size:1.75rem;line-height:1.1;letter-spacing:-.015em}
+  html[data-hero="3d"] .hero__edge small{display:none}
+  .hero__gauge{display:none}
+  .hero__deg{left:auto;right:var(--page-x);top:var(--deg-top,0);font-size:1.75rem;line-height:1.1}
+  html[data-hero="3d"] .hero__doc,html[data-hero="3d"] .hero__ticket{display:none}
+}
+@media(max-width:859.98px) and (max-height:740px){html[data-hero="3d"] .hero__edge .t{font-size:1.5rem}}
+
+/* оговорка финала видна на всех ширинах */
+.hero__edge.is-final small{display:block!important;font-size:1rem;line-height:1.45;color:var(--text)}
+/* финал не набираем крупно до проверки юристом (ст. 24 ФЗ «О рекламе») */
+html[data-hero="3d"] .hero__edge.is-final .t{max-width:none;font-size:clamp(1.25rem,2vw,1.875rem);line-height:1.2;letter-spacing:0;font-variation-settings:normal}
+@media(max-width:859.98px){html[data-hero="3d"] .hero__edge.is-final{max-width:calc(100vw - 2*var(--page-x))}html[data-hero="3d"] .hero__edge.is-final .t{font-size:1.0625rem}}
+
+/* шапка поверх 3D: фон 50% */
+@media(min-width:860px){html[data-hero="3d"].js-ready .site-header:not(.is-solid)::before{opacity:.5;border-bottom-color:transparent}}
+
+@media(min-width:860px){html[data-hero="3d"] .where{max-width:min(66ch,62vw);margin-inline:auto}}
+@media(max-width:859.98px){html[data-hero="3d"] .hero__read{left:0;right:0}}
+
+/* hero-3d.js меряет безопасную область без сдвигов и переходов */
+.is-measuring *{translate:none!important;transition:none!important}
+
+/* телефон: пока нижняя панель записи на экране, срочная строка и подписи поднимаются над ней (hero:cta, класс bar-on от ui.js) */
+@media(max-width:767.98px){
+  html[data-hero="3d"] .hero__urgent,html[data-hero="3d"] .hero__read,html[data-hero="3d"] .hero__edge,.hero__deg{transition:translate .32s var(--ease-out-quint)}
+  html[data-hero="3d"].bar-on .hero__urgent,html[data-hero="3d"].bar-on .hero__read,html[data-hero="3d"].bar-on .hero__edge,html[data-hero="3d"].bar-on .hero__deg{translate:0 calc(-72px - env(safe-area-inset-bottom))}
+}
+
+/* низкое окно: строка приёма сталкивается со срочной строкой, адрес есть в блоке «Как добраться» */
+@media(min-width:860px) and (max-height:820px){html[data-hero="3d"] .where{display:none}}
+
+/* настоящее фото врача в карточке (без пунктирной рамки заглушки) */
+.hero__doc .frame.frame--photo{border:0;padding:0;overflow:hidden;display:block}
+.hero__doc .frame--photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 25%}
+/* 860-1279: между срочной плашкой и талоном мало места, подпись этапа встаёт над срочной плашкой слева */
+@media(min-width:860px) and (max-width:1279.98px){
+  html[data-hero="3d"] .hero__read{left:var(--page-x);right:calc(min(250px,44vw) + clamp(8px,2vw,28px) + 24px);bottom:calc(4svh + 96px);align-items:flex-start;text-align:left}
+}
+
+/* превью кино-стиля: блок «Колено и плечо» наезжает на последний кадр hero, без пустого экрана между ними */
+html[data-look="cine"][data-hero="3d"] .hero{height:560vh;height:560svh;isolation:isolate} /* 29.10: было 700 (аудит P1-2) */
+@media(max-width:767.98px){html[data-look="cine"][data-hero="3d"] .hero{height:500vh;height:500svh}}
+html[data-look="cine"][data-hero="3d"] .hero+.joints{position:relative;z-index:1;margin-top:-100vh;margin-top:-100svh;background:var(--base);box-shadow:0 -32px 64px var(--shade)}
+
+/* превью кино-стиля: шапка на всю ширину, логотип и кнопки по краям, на одной линии с текстом первого экрана */
+
+/* превью кино-стиля: выделение строки «Когда пора к врачу» (компьютер). Активная крупнее на 8% от левого края, с фиолетовой полосой; остальные тише.
+   Ширина строк с запасом под увеличение, чтобы не выйти за колонку. Тихие строки ≥ 3:1 к фону (крупный текст). */
+@media(min-width:1024px){
+  html[data-look="cine"].js-ready .rows li{position:relative;max-width:calc(100% / 1.08);transform-origin:0 50%;color:color-mix(in srgb,var(--text) 55%,var(--base));transition:color .32s var(--ease-out-cubic),transform .48s var(--ease-out-quint)}
+  html[data-look="cine"].js-ready .rows li::before{content:"";position:absolute;left:-22px;top:.12em;bottom:.12em;width:3px;border-radius:2px;background:var(--accent);transform:scaleY(0);transform-origin:50% 50%;transition:transform .48s var(--ease-out-quint)}
+  html[data-look="cine"].js-ready .rows li.on{color:var(--text);transform:scale(1.08)}
+  html[data-look="cine"].js-ready .rows li.on::before{transform:scaleY(1)}
+}
+@media(min-width:1024px) and (prefers-reduced-motion:reduce){html[data-look="cine"].js-ready .rows li,html[data-look="cine"].js-ready .rows li::before{transition:color .2s linear}}
+
+/* превью кино-стиля: спидометр этапов «Как проходит приём». Пройденное — градиент «боль → восстановление», метки этапов, светящийся кончик стрелки */
+html[data-look="cine"] .dial--cine{width:220px;height:128px;overflow:visible;color:var(--text-muted)}
+.dial--cine .dt{fill:none;stroke:var(--line);stroke-width:2}
+.dial--cine .dp{fill:none;stroke:url(#dial-g);stroke-width:4;stroke-linecap:round;stroke-dasharray:1}
+.dial--cine .dk{fill:none;stroke:var(--line-strong);stroke-width:1;opacity:.6}
+.dial--cine .s1{stop-color:var(--danger)}.dial--cine .s2{stop-color:var(--accent)}.dial--cine .s3{stop-color:var(--link)}
+.dial--cine .g1{stop-color:var(--accent);stop-opacity:.75}.dial--cine .g2{stop-color:var(--accent);stop-opacity:0}
+.dial--cine .dm{fill:var(--base);stroke:var(--line-strong);stroke-width:1.5;transition:fill .32s var(--ease-out-cubic),stroke .32s var(--ease-out-cubic),r .32s var(--ease-out-quint)}
+.dial--cine .dm.done{fill:var(--link);stroke:var(--link);r:4.5px}
+.dial--cine .dm.on{fill:var(--accent);stroke:var(--accent);r:6px;filter:drop-shadow(0 0 6px var(--accent))}
+.dial--cine .dns{font:400 11px/1 var(--font-mono);fill:var(--text-muted)}
+.dial--cine .dns text.on{fill:var(--text)}
+.dial--cine .needle line{stroke:var(--text);stroke-width:2;stroke-linecap:round}
+.dial--cine .needle .tip{fill:var(--text)}
+.dial--cine .hub{fill:var(--base);stroke:var(--text);stroke-width:2}
+html[data-look="cine"] .process.is-pinned .pin-ui{gap:24px;align-items:flex-end}
+
+/* превью: иконки в ссылках блока «Обо мне» (запись, телеграм-канал) */
+html[data-look="cine"] .about__links .act{gap:10px;text-underline-offset:.25em}
+html[data-look="cine"] .about__links .act .ic{flex:none;font-size:22px;width:1em;height:1em;color:var(--accent)}
+
+/* превью: больше воздуха между заголовком и подзаголовком первого экрана. Подзаголовок с кнопками внизу упирается в плашку «103/112», поэтому поднимаем сам заголовок: padding-bottom сдвигает центр вверх на половину */
+@media(min-width:861px){html[data-look="cine"][data-hero="3d"] .hero__type{padding-bottom:clamp(64px,9svh,96px)}}
+
+/* превью, компьютер: дымка под подзаголовком и кнопками, чтобы текст не лежал на светящихся костях (аудит 28.10, P1).
+   Овал цвета фона за текстом, гаснет вместе с блоком при прокрутке; колено остаётся на месте */
+@media(min-width:860px){
+  html[data-look="cine"][data-hero="3d"] .hero__copy::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-48px;bottom:-40px;width:min(980px,92%);transform:translateX(-50%);
+    background:radial-gradient(closest-side,color-mix(in srgb,var(--base) 86%,transparent) 0 55%,color-mix(in srgb,var(--base) 50%,transparent) 78%,transparent)}
+}
+
+/* превью, телефон и узкие окна: старт как второй шаг — колено вверху, заголовок, подзаголовок и кнопки внизу над плашкой 103/112.
+   --copy-h ставит hero-3d.js; дымка под текстом снизу, а не сверху */
+@media(max-width:859.98px){
+  html[data-look="cine"][data-hero="3d"] .hero__copy{top:auto;bottom:calc(8px + 5.6rem + 12px)}
+  html[data-look="cine"][data-hero="3d"] .hero__type{align-items:flex-end;padding-top:0;padding-bottom:calc(8px + 5.6rem + 12px + var(--copy-h,160px) + 14px)}
+  html[data-look="cine"][data-hero="3d"] .hero__stage::before{top:auto;bottom:0;height:calc(5.6rem + var(--copy-h,160px) + 2.2 * clamp(30px,10.4vw,80px) + 72px);background:linear-gradient(transparent,var(--base-2) 42%)}
+}
+
+/* превью, телефон: лёгкая сетка за коленом, как разметка снимка; видна вокруг колена и растворяется к краям и к тексту внизу */
+@media(max-width:859.98px){
+  html[data-look="cine"][data-hero="3d"] .hero__stage{--grid:color-mix(in srgb,var(--line-strong) 28%,transparent);
+    background:
+      radial-gradient(ellipse 70% 42% at 50% 36%,transparent 0 35%,var(--base) 100%),
+      linear-gradient(var(--grid) 1px,transparent 1px) 50% 0/28px 28px,
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px) 50% 0/28px 28px,
+      linear-gradient(180deg,var(--base),var(--base-2))}
+}
+
+/* превью: круглый спидометр этапов (кольцо 300°, неоновый градиент «боль → восстановление», номер этапа в центре) */
+html[data-look="cine"] .dial--ring{width:180px;height:180px;overflow:visible}
+.dial--ring .dr{fill:none;stroke:var(--line);stroke-width:1}
+.dial--ring .dt{stroke-width:6;stroke:color-mix(in srgb,var(--line) 70%,transparent)}
+.dial--ring .dp{stroke-width:6}
+.dial--ring .dp--halo{stroke-width:16;opacity:.35;filter:blur(6px)}
+.dial--ring .dk{opacity:.5}
+.dial--ring .dm{r:3.5px;fill:var(--base);stroke-width:1.5}
+.dial--ring .dm.done{r:3.5px;fill:var(--link);stroke:var(--link)}
+.dial--ring .dm.on{r:5px}
+.dial--ring .dc{font:500 46px/1 var(--font-mono);fill:var(--text);letter-spacing:-.02em}
+.dial--ring .dc2{font:400 12px/1 var(--font-mono);fill:var(--text-muted);letter-spacing:.08em}
+.dial--ring .needle .tip{fill:#fff;filter:drop-shadow(0 0 6px var(--accent))}
+html[data-look="cine"] .process.is-pinned .pin-ui:has(.dial--ring) #step-count{display:none}
+
+/* превью: заголовок блока внутри закреплённой сцены (над кольцом, этапом и талоном); кольцо слева от текста этапа */
+@media(min-width:1024px){
+  html[data-look="cine"] .process[data-pin="all"].is-pinned .process__stage{height:calc(100dvh - var(--header-h));padding-top:0;grid-template-rows:auto auto;align-content:center;align-items:start;row-gap:clamp(20px,4vh,48px)}
+  html[data-look="cine"] .process[data-pin="all"].is-pinned .process__stage>.sec-head{grid-column:1/13;margin:0}
+  html[data-look="cine"] .process[data-pin="all"].is-pinned .process__l{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:40px;align-items:start}
+  html[data-look="cine"] .process[data-pin="all"].is-pinned .pin-ui{margin:0}
+  html[data-look="cine"] .dial--ring{width:156px;height:156px}
+}
+@media(min-width:1024px) and (max-height:819.98px){
+  html[data-look="cine"] .process[data-pin="all"].is-pinned .talon{zoom:.8}
+  html[data-look="cine"] .process[data-pin="all"].is-pinned .step h3{font-size:clamp(2rem,1.2rem + 2.2vw,3rem)}
+}
+@media(min-width:1024px) and (min-height:900px){html[data-look="cine"] .dial--ring{width:180px;height:180px}}
+
+/* превью: линза заголовка первого экрана (hero-text-fx.js) — круг у курсора, внутри текст контуром, снаружи обычный; поверх холст созвездия */
+html[data-look="cine"] .hero h1.has-lens{position:relative}
+html[data-look="cine"] .hero h1.has-lens .line{-webkit-mask-image:radial-gradient(circle var(--lr,0px) at var(--lx,-999px) var(--ly,-999px),transparent 62%,#000 100%);mask-image:radial-gradient(circle var(--lr,0px) at var(--lx,-999px) var(--ly,-999px),transparent 62%,#000 100%)}
+html[data-look="cine"] .hero h1.has-lens .h1-wire{position:absolute;inset:0;pointer-events:none}
+html[data-look="cine"] .hero h1.has-lens .h1-wire .line{-webkit-mask-image:radial-gradient(circle var(--lr,0px) at var(--lx,-999px) var(--ly,-999px),#000 62%,transparent 100%);mask-image:radial-gradient(circle var(--lr,0px) at var(--lx,-999px) var(--ly,-999px),#000 62%,transparent 100%)}
+html[data-look="cine"] .hero h1.has-lens .h1-wire .line{position:relative}
+html[data-look="cine"] .hero h1.has-lens .h1-wire .line>span{visibility:hidden}
+/* «змейки» (hero-text-fx.js): еле видный контур буквы и два неоновых отрезка по нему навстречу друг другу */
+html[data-look="cine"] .hero{--neon:var(--text)}
+@media(prefers-color-scheme:dark){html[data-look="cine"]:not([data-theme=light]) .hero{--neon:#FFFFFF}}
+html[data-look="cine"][data-theme=dark] .hero{--neon:#FFFFFF}
+html[data-look="cine"] .hero .h1-snake{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 3px var(--neon)) drop-shadow(0 0 9px color-mix(in srgb,var(--neon) 60%,transparent))}
+html[data-look="cine"] .hero .h1-snake text{fill:none;stroke:var(--neon);text-transform:uppercase}
+html[data-look="cine"] .hero .h1-snake .base{stroke-width:1;opacity:.55} /* буква в линзе читается (аудит P2-6) */
+html[data-look="cine"] .hero .h1-snake .sn{stroke-width:2;stroke-linecap:round}
+html[data-look="cine"] .hero__constellation{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
+
+/* ===== превью: полировка по аудиту 28.10 (docs/09-impeccable-audit.md) ===== */
+/* шапка: на прокрутке сплошной фон без просвечивающего текста (P3-1); над 3D вместо полосы 50 % мягкая дымка вниз (P2-3) */
+@media(min-width:860px){html[data-look="cine"][data-hero="3d"].js-ready .site-header:not(.is-solid)::before{opacity:1;bottom:-48px;border-bottom:0;background:linear-gradient(var(--base) 0,color-mix(in srgb,var(--base) 70%,transparent) 50%,transparent)}}
+/* угол над костью: подложка цвета фона вокруг цифр (08, P2) и знак градуса вплотную к числу (P3-7) */
+html[data-look="cine"] .hero__deg{text-shadow:0 0 3px var(--base),0 0 10px var(--base),0 0 22px var(--base)}
+.hero__deg .dg{margin-left:-.1em}
+/* телефон, 3D: после первого шага срочная плашка сворачивается в одну строку (P2-8); полный текст есть в блоке «Не ждите приёма» */
+.hero__urgent .u-short{display:none}
+@media(max-width:859.98px){
+  html[data-look="cine"][data-hero="3d"] .hero__urgent.is-chip{padding-block:8px;align-items:center}
+  html[data-look="cine"][data-hero="3d"] .hero__urgent.is-chip>span:not(.u-short){display:none}
+  html[data-look="cine"][data-hero="3d"] .hero__urgent.is-chip .u-short{display:inline}
+}
+/* услуги: заголовки со своей страницей без подчёркивания, со стрелкой; подчёркивание при наведении (P2-10) */
+html[data-look="cine"] .price__row .svc__link{text-decoration-color:transparent}
+html[data-look="cine"] .price__row .svc__link:hover,html[data-look="cine"] .price__row .svc__link:focus-visible{text-decoration-color:var(--accent)}
+html[data-look="cine"] .svc__go{font-size:.7em;margin-left:.35em;vertical-align:.08em;color:var(--accent);transform:rotate(90deg);transition:transform .2s var(--ease-out-cubic)}
+html[data-look="cine"] .svc__link:hover .svc__go{transform:rotate(90deg) translateY(-3px)}
+/* кольцо этапов: подписи читаемые (P3-3); кольцо 156 px из 252 по viewBox, поэтому шрифт в единицах SVG крупнее */
+html[data-look="cine"] .dial--ring .dns{font-size:19px}
+html[data-look="cine"] .dial--ring .dc2{font-size:18px;letter-spacing:.04em}
+/* «Как добраться»: адрес на ступень меньше заголовка, чтобы главным оставался H2 (P3-2) */
+@media(min-width:768px){html[data-look="cine"] .contacts .addr{font-size:clamp(1.75rem,1.2rem + 1.2vw,2.25rem)}}
+/* плечо: мягкий край холста вместо жёсткого среза (P2-7) */
+html[data-look="cine"] .joints__view{-webkit-mask-image:linear-gradient(transparent,#000 9%,#000 88%,transparent);mask-image:linear-gradient(transparent,#000 9%,#000 88%,transparent)}
+@media(max-width:859.98px){html[data-look="cine"] .joints__view{-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}}
+
+/* ===== превью: решения 29.10 по аудиту ===== */
+/* «Колено и плечо» закреплено на 2,2 экрана вместо 3 (P1-2) */
+html[data-look="cine"].js-ready .joints__track{height:220svh}
+/* «Как проходит приём», компьютер: номер этапа только в кольце, «Вы получите» только в талоне (P3-4, 08), талон виден целиком сразу, впереди бледные строки (P2-11) */
+html[data-look="cine"] .process.is-pinned .step__num{display:none}
+html[data-look="cine"] .process.is-pinned .step .get{display:none}
+html[data-look="cine"] .process.is-pinned .talon__paper{clip-path:none}
+html[data-look="cine"] .process.is-pinned .t-row{transition:opacity .4s var(--ease-out-cubic)}
+html[data-look="cine"] .process.is-pinned .t-row.is-next{opacity:.35}
+/* телефон, обе темы (29.10): сетка бледная, под коленом её нет, фон вокруг колена своей темы (в тёмной тёмный).
+   Раньше так было только в светлой: там сетка сквозь полупрозрачное колено читалась поверх */
+@media(max-width:859.98px){
+  html[data-look="cine"][data-hero="3d"] .hero__stage{--grid:color-mix(in srgb,var(--line-strong) 14%,transparent);
+    background:
+      radial-gradient(ellipse 40% 30% at 50% 34%,var(--base) 0 40%,transparent 100%),
+      radial-gradient(ellipse 70% 42% at 50% 36%,transparent 0 35%,var(--base) 100%),
+      linear-gradient(var(--grid) 1px,transparent 1px) 50% 0/28px 28px,
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px) 50% 0/28px 28px,
+      linear-gradient(180deg,var(--base),var(--base-2))}
+}
+/* слово «колено» в заголовке этапа цветом (29.10) */
+html[data-look="cine"] .hero__edge .kw{font-style:normal;color:var(--accent)}
+/* телефон: подписи частей колена с выносками по обе стороны, чтобы согнутое колено не читалось как локоть (29.10) */
+.klabels{display:none}
+@media(max-width:859.98px){
+  html[data-look="cine"][data-hero="3d"] .klabels{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0}
+  .klabels svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .klabels path{fill:none;stroke:color-mix(in srgb,var(--text) 45%,transparent);stroke-width:1}
+  .klabels circle{fill:var(--text)}
+  .klabels .kl{position:absolute;left:0;top:0;max-width:7.6em;font:400 .8125rem/1.25 var(--font-sans);color:var(--text);text-shadow:0 0 6px var(--base),0 0 12px var(--base)}
+  .klabels .kl.r{text-align:right}
+  .klabels .kl.key{color:var(--accent);font-weight:560}
+  .klabels .key-line{stroke:color-mix(in srgb,var(--accent) 80%,transparent)}
+  .klabels circle.key{fill:var(--accent)}
+  .klabels .kl.key.white{color:var(--text);font-weight:400}
+  .klabels .key-line.white{stroke:color-mix(in srgb,var(--text) 45%,transparent)}
+  .klabels circle.key.white{fill:var(--text)}
+}
+/* телефон: один свайп = один этап колена (точки ставит hero-3d.js) */
+html.hero-snap{scroll-snap-type:y mandatory}
+.hero__snap{position:absolute;left:0;width:1px;height:1px;pointer-events:none;scroll-snap-align:start;scroll-snap-stop:always}
+/* телефон, «Колено и плечо»: заголовок вверху сцены, плечо крупнее на освободившемся месте (решение владельца 29.10) */
+@media(max-width:859.98px){
+  html[data-look="cine"].js-ready .joints__pin{justify-content:flex-start}
+  html[data-look="cine"] .joints__pin>.joints__grid{padding-top:20px;gap:8px}
+  html[data-look="cine"].js-ready .joints__view{height:max(260px,calc(100svh - var(--header-h) - 300px))}
+}
+/* телефон (кино): после ухода плашки 103/112 подписи этапа («Вид спереди…» и др.) и заголовок этапа опускаются на её место, без пустой полосы снизу (29.10) */
+@media(max-width:859.98px){
+  html[data-look="cine"][data-hero="3d"] .hero__read,html[data-look="cine"][data-hero="3d"] .hero__edge{transition:bottom .4s var(--ease-out-quint),translate .32s var(--ease-out-quint)}
+  html[data-look="cine"][data-hero="3d"] .hero.urg-off .hero__read{bottom:16px}
+  html[data-look="cine"][data-hero="3d"] .hero.urg-off .hero__edge{bottom:calc(16px + var(--read-h,3.6rem) + 12px)}
+}
+/* телефон, «Колено и плечо»: запас под нижнюю панель записи (72 px) */
+@media(max-width:859.98px){html[data-look="cine"].js-ready .joints__view{height:max(240px,calc(100svh - var(--header-h) - 372px))}}
+/* телефон (кино), плашки 103/112 нет: с нижней панелью записи подписи этапа стоят вплотную над ней (6 px), без неё у самого низа (29.10) */
+@media(max-width:859.98px){
+  html[data-look="cine"][data-hero="3d"] .hero.urg-off .hero__read{bottom:8px}
+  html[data-look="cine"][data-hero="3d"] .hero.urg-off .hero__edge{bottom:calc(8px + var(--read-h,3.6rem) + 10px)}
+  html[data-look="cine"][data-hero="3d"].bar-on .hero.urg-off .hero__read,html[data-look="cine"][data-hero="3d"].bar-on .hero.urg-off .hero__edge{translate:0 calc(-69px - env(safe-area-inset-bottom))}
+}
+/* телефон (кино): сцена по текущей высоте экрана — когда браузер прячет адресную строку (обычно к 3-му свайпу), низ сцены не отстаёт от панели «Записаться» (29.10) */
+@media(max-width:859.98px){html[data-look="cine"][data-hero="3d"] .hero__stage{height:100dvh}}
+/* телефон (кино): подписи слайдов 02–06 («Вид спереди: разгибание», «Схема по 3D-модели…») по левому краю, как заголовок этапа; первый экран по центру */
+@media(max-width:859.98px){html[data-look="cine"][data-hero="3d"] .hero__read{align-items:flex-start;text-align:left}}
+/* перенос в подписи этапа (04: «Тест Лахмана:» / «смещение…») */
+@media(max-width:859.98px){#hero-cap{white-space:pre-line}}
+/* телефон, «Колено и плечо»: как слайды 02–06 — подпись «Рука отведена…» внизу у панели «Записаться», плечо на всё место между заголовком и подписью (29.10) */
+@media(max-width:859.98px){
+  html[data-look="cine"].js-ready .joints__pin>.joints__grid{flex:1;display:flex;flex-direction:column;padding-bottom:calc(8px + 69px + env(safe-area-inset-bottom))}
+  html[data-look="cine"].js-ready .joints__stage{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+  html[data-look="cine"].js-ready .joints__view{flex:1;height:auto;min-height:240px}
+}
+/* телефон, «Колено и плечо»: холст плеча заходит под заголовок и текст (поднятая рука уходит за них), текст поверх */
+@media(max-width:859.98px){
+  html[data-look="cine"].js-ready .joints__head{position:relative;z-index:2}
+  html[data-look="cine"].js-ready .joints__stage{margin-top:-120px}
+  html[data-look="cine"] .joints__view{-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 86%,transparent)}
+}
+/* ===== запасной режим без 3D (слабые устройства, нет видеокарты, «меньше движения», ?hero=poster), 29.10 ===== */
+.hero__steps{display:none}
+html[data-look="cine"][data-hero="poster"] .hero__steps{display:inline-flex;margin-top:12px}
+html[data-look="cine"][data-hero="poster"] .hero__poster{text-align:center}
+html[data-look="cine"][data-hero="poster"] .hero__poster img{-webkit-mask-image:radial-gradient(ellipse closest-side at 50% 50%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse closest-side at 50% 50%,#000 62%,transparent 100%)}
+html[data-look="cine"][data-hero="poster"] .hero__poster figcaption{text-align:center}
+/* телефон: колено сверху во всю ширину, заголовок и кнопки под ним по центру, как в 3D-версии */
+@media(max-width:859.98px){
+  html[data-look="cine"][data-hero="poster"] .hero{padding-top:var(--header-h)}
+  html[data-look="cine"][data-hero="poster"] .hero__stage{grid-template-areas:"poster" "cap" "type" "sub" "cta" "steps" "urgent" "where";text-align:center}
+  html[data-look="cine"][data-hero="poster"] .hero__poster{display:contents}
+  html[data-look="cine"][data-hero="poster"] .hero__poster picture{grid-area:poster;display:block;margin:0 calc(-1*var(--page-x))}
+  html[data-look="cine"][data-hero="poster"] .hero__poster figcaption{grid-area:cap;margin-bottom:8px}
+  html[data-look="cine"][data-hero="poster"] .hero__steps{grid-area:steps;justify-self:center}
+  html[data-look="cine"][data-hero="poster"] .hero__poster img{width:100%;-webkit-mask-image:radial-gradient(ellipse 60% 56% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 60% 56% at 50% 50%,#000 55%,transparent 100%)}
+  html[data-look="cine"][data-hero="poster"] .hero__poster figcaption{margin-top:-24px;position:relative}
+  html[data-look="cine"][data-hero="poster"] .hero .lead{margin-inline:auto}
+  html[data-look="cine"][data-hero="poster"] .hero__cta{justify-content:center}
+}
+/* компьютер: колено крупно справа на высоту экрана, без рамки, края растворяются в фоне */
+@media(min-width:860px){
+  html[data-look="cine"][data-hero="poster"] .hero__stage{min-height:calc(100svh - var(--header-h) - var(--head-gap));align-content:center}
+  /* левый текст по центру высоты колена, ссылка на этапы под плашкой: справа только колено и подпись, слева без пустоты внизу */
+  html[data-look="cine"][data-hero="poster"] .hero__stage{grid-template-rows:1fr auto auto auto auto auto auto 1fr auto;grid-template-areas:". pic" "type pic" "sub pic" "cta pic" "where pic" "urgent pic" "steps pic" ". pic" ". cap"}
+  html[data-look="cine"][data-hero="poster"] .hero__poster{display:contents}
+  html[data-look="cine"][data-hero="poster"] .hero__poster picture{grid-area:pic;align-self:center;justify-self:center}
+  html[data-look="cine"][data-hero="poster"] .hero__poster figcaption{grid-area:cap}
+  html[data-look="cine"][data-hero="poster"] .hero__steps{grid-area:steps;justify-self:start;margin-top:var(--space-5)}
+  html[data-look="cine"][data-hero="poster"] .hero__urgent{margin-top:var(--space-5);justify-self:start;max-width:52ch}
+  html[data-look="cine"][data-hero="poster"] .hero__poster img{width:auto;max-width:100%;height:min(calc(100svh - var(--header-h) - 120px),860px);margin-top:-40px;aspect-ratio:4/5;object-fit:cover;margin-inline:auto}
+}

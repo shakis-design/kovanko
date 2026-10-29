@@ -1,0 +1,14 @@
+# [домен] заменяет node scripts/seo/seo.mjs launch --domain=...
+# Страницы с noindex (privacy, cookie) здесь не закрываем: роботу нужно увидеть noindex.
+# CSS, JS, шрифты и картинки открыты: без них Google и Яндекс не отрисуют страницу.
+
+User-agent: *
+Disallow: /404.html
+Disallow: /*?hero=
+Disallow: /*&hero=
+Allow: /
+
+# Яндекс: склейка адресов с метками рекламы и служебным параметром первого экрана
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&ysclid&gclid&hero /
+
+Sitemap: https://[домен]/sitemap.xml

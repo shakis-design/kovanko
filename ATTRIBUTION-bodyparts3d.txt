@@ -1,0 +1,9 @@
+BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International.
+Источник: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
+Изменения: кости левого колена (FJ3259, FJ3282, FJ3260, FJ3275) обрезаны, сглажены, сжаты Draco.
+Плечо: кости левого плеча (лопатка FJ3279 / FMA13396, плечевая кость FJ3262 / FMA23131, ключица FJ3237 / FMA13323) обрезаны (плечевая кость 220 мм от головки), сглажены, сжаты Draco: assets/shoulder.draco.glb. Скрипт: scripts/media/build-shoulder.py.
+Снимки с разметкой assets/svg/xray-*.svg построены по геометрии костей колена и плеча (срезы и контуры).
+
+Z-Anatomy, the libre 3D atlas of anatomy (https://www.z-anatomy.com/), licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). Основа: BodyParts3D, The Database Center for Life Science.
+Изменения (28.10.2026): из атласа взяты правая рука и плечевой пояс (кости, вращательная манжета, связки плеча) и колено (кости, мениски, крестообразные и коллатеральные связки); вершины перенесены в мировые координаты, сетки упрощены, назначены свои материалы, сжаты Draco. Постеры и кадры отрендерены в Blender. Изменённые модели и изображения распространяются по CC BY-SA 4.0.
+Скрипты: scripts/blender/zanat-extract.py, zanat-render.py, zanat-frames.py, zanat-export.py.
