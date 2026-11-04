@@ -44,7 +44,7 @@ export function initUi() {
 
 // M6b: строка симптома в активной полосе включает зоны на схеме тела; M21: выноска от зоны к строке
 function initSymptoms() {
-  const map = $('.bodymap'), rows = $$('#rows li');
+  const map = $('.bodymap'), rows = $$('.sym .rows li'); // два списка: колено и плечо (04.11)
   if (!map) return;
   const zones = (list, faint) => $$('.zone', map).forEach(z => {
     const on = list.includes(z.id.split('-')[1]) || list.includes('all');

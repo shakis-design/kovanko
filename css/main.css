@@ -882,3 +882,30 @@ html[data-look="cine"] .site-header::before{background:var(--base)}
 /* перенос только на компьютере */
 @media(max-width:767.98px){.br-d{display:none}}
 html .hero .lead:has(br){text-wrap:wrap;max-width:none} /* подзаголовок первого экрана: три строки по смыслу (решение владельца 29.10) */
+
+/* 04.11 правки врача: симптомы по суставам, исследования, две клиники */
+.sym__joint{margin-top:var(--block-gap)}
+.sym .sym__joint+.rows{margin-top:var(--space-6)}
+.exams{margin-top:var(--space-8);padding:var(--card-pad);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-m);max-width:var(--measure)}
+.exams__h{font-size:var(--fs-lead);font-weight:600;line-height:1.3}
+.exams__list{margin-top:var(--space-4);display:grid;gap:var(--space-3);list-style:decimal;padding-left:1.4em}
+.exams__list li::marker{color:var(--text-muted);font-variant-numeric:tabular-nums}
+.exams p{margin-top:var(--space-3)}.exams__h+p{margin-top:var(--space-4)}
+.clinics__exams{margin-top:var(--space-6)}
+.clinics{margin-top:var(--block-gap)}
+.clinics__grid{display:grid;gap:var(--group-gap);margin-top:var(--space-6)}
+@media(min-width:768px){.clinics__grid{grid-template-columns:1fr 1fr;column-gap:var(--gutter)}}
+.clinic{border-top:1px solid var(--line);padding-top:var(--group-gap);display:grid;gap:var(--space-3);align-content:start}
+.clinic__tel a{font-weight:560;color:var(--text);font-variant-numeric:tabular-nums;white-space:nowrap}
+.clinics__note{margin-top:var(--block-gap);max-width:var(--measure);padding:var(--card-pad);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-m);font-weight:560}
+.clinics__sign{margin-top:var(--space-6);color:var(--text-muted);font-style:italic}
+.clinics .btn{margin-top:var(--space-6)}
+.faq__tels{display:grid;gap:4px;margin-top:24px}.faq__tels .tel{font-size:var(--fs-h3);margin-bottom:12px}
+.book__clinic{margin-top:var(--space-6);color:var(--text-muted)}
+.book__clinic+.book__tel{margin-top:4px}
+.pside .small{display:block;margin-top:8px}
+.sym__joint{font-weight:560}
+.rows--long{font-size:var(--fs-lead);line-height:1.45;gap:var(--space-5)}
+.rows--long li{max-width:var(--measure)}
+.rows--long .ic{font-size:24px;transform:translateY(4px);flex:none}
+@media(min-width:768px){.rows--long .ic{font-size:24px;transform:translateY(4px)}}
