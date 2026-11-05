@@ -115,13 +115,31 @@ function initSymptoms() {
 // «Как добраться»: своя карта (OpenStreetMap, img/map/route.svg). Картинкой она следует только системной теме,
 // поэтому у экрана подменяем её на встроенную SVG: цвета из токенов --m-* и переключателя темы сайта (29.10)
 function initMap() {
-  const box = $('#cmap'), img = box && $('.cmap__img', box);
-  if (!img || !('IntersectionObserver' in window)) return;
-  const inline = () => fetch(img.currentSrc || img.src).then(r => (r.ok ? r.text() : Promise.reject())).then(t => {
+  const box = $('#cmap');
+  if (!box) return;
+  const inline = img => fetch(img.currentSrc || img.src).then(r => (r.ok ? r.text() : Promise.reject())).then(t => {
     const svg = new DOMParser().parseFromString(t, 'image/svg+xml').documentElement;
     if (svg.nodeName !== 'svg') return;
     svg.setAttribute('preserveAspectRatio', 'xMidYMid slice'); img.replaceWith(document.importNode(svg, true));
   }).catch(() => {}); // не вышло: остаётся картинка, ссылка на маршрут работает
-  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); inline(); } }, { rootMargin: '600px' });
+  let seen = false;
+  const load = () => { if (seen) $$('.cmap__img', box).forEach(img => { if (!img.closest('[hidden]')) inline(img); }); };
+  // 05.11: две клиники. Переключатель меняет адрес, метро, маршрут и карту; без JS обе показаны подряд
+  const sw = $('#place-switch'), tabs = sw ? $$('[role=tab]', sw) : [], parts = $$('#contacts [data-place]');
+  const show = (id, focus) => {
+    parts.forEach(p => { p.hidden = p.dataset.place !== id; });
+    tabs.forEach(t => { const on = t.dataset.for === id; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
+    load();
+  };
+  if (sw) {
+    sw.hidden = false; show('braesku');
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(t.dataset.for));
+      t.addEventListener('keydown', e => { const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (k) { e.preventDefault(); show(tabs[(i + k + tabs.length) % tabs.length].dataset.for, true); } });
+    });
+    $$('[data-place-go]').forEach(a => a.addEventListener('click', () => show(a.dataset.placeGo)));
+  }
+  if (!('IntersectionObserver' in window)) { seen = true; return load(); }
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); seen = true; load(); } }, { rootMargin: '600px' });
   io.observe(box);
 }

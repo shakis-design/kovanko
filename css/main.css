@@ -900,12 +900,83 @@ html .hero .lead:has(br){text-wrap:wrap;max-width:none} /* подзаголов�
 .clinics__note{margin-top:var(--block-gap);max-width:var(--measure);padding:var(--card-pad);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-m);font-weight:560}
 .clinics__sign{margin-top:var(--space-6);color:var(--text-muted);font-style:italic}
 .clinics .btn{margin-top:var(--space-6)}
-.faq__tels{display:grid;gap:4px;margin-top:24px}.faq__tels .tel{font-size:var(--fs-h3);margin-bottom:12px}
+.faq__tels{display:grid;gap:16px;margin-top:24px}
+.tpair{display:grid;justify-items:start;gap:0}.tpair .small{margin:0}.tpair .tel{margin:0!important;min-height:44px;display:inline-flex;align-items:center;line-height:1.2} /* 44 px: удобно нажать на телефоне */
+.faq__tels .tel{font-size:var(--fs-h3)}
 .book__clinic{margin-top:var(--space-6);color:var(--text-muted)}
 .book__clinic+.book__tel{margin-top:4px}
-.pside .small{display:block;margin-top:8px}
+.pside .tpair+.tpair{margin-top:12px}.pside h2+.tpair{margin-top:12px}
 .sym__joint{font-weight:560}
 .rows--long{font-size:var(--fs-lead);line-height:1.45;gap:var(--space-5)}
 .rows--long li{max-width:var(--measure)}
 .rows--long .ic{font-size:24px;transform:translateY(4px);flex:none}
 @media(min-width:768px){.rows--long .ic{font-size:24px;transform:translateY(4px)}}
+
+/* 05.11 /shkaly/: шкалы плеча */
+.scales .sc-privacy{display:flex;gap:12px;align-items:flex-start;margin-top:var(--space-6);max-width:var(--measure);color:var(--text-muted)}
+.scales .sc-privacy .ic{font-size:22px;flex:none;margin-top:2px}
+.sc-nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:var(--space-6)}
+.sc-nav a{min-height:44px;display:inline-flex;align-items:center}
+.sc{margin-top:var(--block-gap);padding-top:var(--space-8);border-top:1px solid var(--line);max-width:860px;scroll-margin-top:calc(var(--header-h) + 16px)}
+.sc h2{font-size:var(--fs-h3);font-weight:560;line-height:1.22}
+.sc>.small{margin-top:12px;max-width:var(--measure)}
+.sc-part{border:0;padding:0;margin:var(--space-8) 0 0}
+.sc-part legend{font-weight:600;font-size:var(--fs-lead);padding:0}
+.sc-field{display:grid;gap:6px;margin-top:var(--space-4);max-width:420px}
+.sc-list{list-style:decimal;padding-left:1.6em;display:grid;gap:var(--space-6);margin-top:var(--space-4)}
+.sc-list li::marker{color:var(--text-muted);font-variant-numeric:tabular-nums}
+.sc-q{display:block;font-weight:560;max-width:var(--measure)}
+.sc-list .input{margin-top:8px;max-width:520px}
+.sc-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sc-opts label{position:relative}
+.sc-opts input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.sc-opts span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line-strong);border-radius:var(--r-m);cursor:pointer;transition:background-color .15s,border-color .15s,color .15s}
+.sc-opts input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--on-accent,#fff)}
+.sc-opts input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+@media(hover:hover){.sc-opts label:hover span{border-color:var(--accent)}}
+.sc-opts--scale{gap:6px}.sc-opts--scale span{min-width:44px;justify-content:center;padding:0;font-variant-numeric:tabular-nums}
+.sc-pain__top{display:block;margin-top:6px;font-size:.875rem;color:var(--text-muted)}
+.sc-result{margin-top:var(--space-8);padding:var(--card-pad);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-m)}
+.sc-total{font-size:var(--fs-lead)}.sc-total b{font-size:var(--fs-h3);font-variant-numeric:tabular-nums}
+.sc-bands{margin-top:var(--space-4);display:grid;gap:6px}
+.sc-bands li{color:var(--text-muted);padding-left:18px;position:relative}
+.sc-bands li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;border:1px solid currentColor}
+.sc-bands li.on{color:var(--text);font-weight:600}.sc-bands li.on::before{background:var(--accent);border-color:var(--accent)}
+.sc-result .small{margin-top:var(--space-3)}
+.sc-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--space-6)}
+.sc-btns [hidden]{display:none}.sc-btns [aria-busy=true]{opacity:.6;cursor:progress}
+.sc-share-hint{margin-top:12px;max-width:var(--measure)}.sc-share-hint[hidden]{display:none}
+.sc-msg{margin-top:12px;min-height:1.5em;font-weight:560}
+.sc-wait{margin-top:var(--space-4)}
+.sc-back{margin-top:var(--block-gap)}
+@media print{
+  .site-header,.footer,.cookie,.bottombar,.to-top,.sc-nav,.sc-btns,.sc-back,#constant,#rowe,.skip{display:none!important}
+  .page{padding:0}.sc{border:0;margin-top:12px;padding-top:0}
+  .sc-opts span{min-height:0;padding:2px 8px;border-color:#999}
+  .sc-opts input:checked+span{background:#000;color:#fff;border-color:#000}
+  .sc-result{border-color:#999;background:none}
+  *{color:#000!important}
+}
+.clinic__mail a{color:var(--text);overflow-wrap:anywhere}
+.cfacts dd a[href^="mailto"],.fsec a[href^="mailto"]{overflow-wrap:anywhere}
+
+/* 05.11 «Как добраться»: две клиники */
+.place-switch{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;margin:var(--space-6) 0 var(--space-6);border:1px solid var(--line-strong);border-radius:26px}
+.place-switch[hidden],.place[hidden],.cmap__link[hidden]{display:none}
+.place-switch button{min-height:44px;padding:0 18px;border:0;border-radius:22px;background:none;color:var(--text-muted);font:inherit;font-weight:560;cursor:pointer;transition:background-color .2s,color .2s}
+.place-switch button[aria-selected=true]{background:var(--accent);color:var(--on-accent)}
+.place-switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(hover:hover){.place-switch button[aria-selected=false]:hover{color:var(--text)}}
+.place__h{margin-top:var(--space-8)}
+.js-ready .place__h{display:none}
+.place+.place{margin-top:var(--space-8)}.js-ready .place+.place{margin-top:0}
+.cmap__link+.cmap__link{margin-top:var(--space-6)}.js-ready .cmap__link+.cmap__link{margin-top:0}
+
+/* 05.11 ссылки на шкалы по сайту; пункт меню «Шкалы» */
+.clinics__scales{margin-top:var(--space-4)}
+.bring__scales,.svc__scales{display:inline-flex;margin-top:16px}
+.bring .btn+.bring__scales{margin-left:24px}
+@media(max-width:767.98px){.bring .btn+.bring__scales{margin-left:0;display:flex}}
+@media(min-width:64em){.site-nav a{white-space:nowrap}}
+@media(min-width:64em) and (max-width:1279.98px){.js-ready .site-nav,.site-nav{gap:14px}.site-nav a{font-size:.875rem}}
+@media(min-width:1280px) and (max-width:1439.98px){.js-ready .site-nav,.site-nav{gap:18px}.site-nav a{font-size:.9375rem}}
