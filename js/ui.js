@@ -40,6 +40,7 @@ export function initUi() {
 
   initSymptoms();
   initMap();
+  initReviews();
 }
 
 // M6b: строка симптома в активной полосе включает зоны на схеме тела; M21: выноска от зоны к строке
@@ -142,4 +143,27 @@ function initMap() {
   if (!('IntersectionObserver' in window)) { seen = true; return load(); }
   const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); seen = true; load(); } }, { rootMargin: '600px' });
   io.observe(box);
+}
+
+// Отзывы: виджет Яндекса (iframe). Внутри него Яндекс Метрика, поэтому сам грузим только при согласии на аналитику,
+// иначе по кнопке «Показать отзывы». Тема виджета следует теме сайта (05.11)
+function initReviews() {
+  const box = $('#yrev');
+  if (!box) return;
+  const theme = () => (root.dataset.theme === 'light' ? 'light' : 'dark');
+  const url = () => box.dataset.src + '&theme=' + theme();
+  const load = () => {
+    if ($('iframe', box)) return;
+    const f = Object.assign(document.createElement('iframe'), { src: url(), title: 'Отзывы о враче на Яндексе', loading: 'lazy' });
+    f.setAttribute('frameborder', '0');
+    box.replaceChildren(f); box.classList.add('is-on');
+  };
+  $('[data-yrev-load]', box)?.addEventListener('click', load);
+  let agreed = false;
+  try { agreed = !!JSON.parse(localStorage.getItem('cookie-consent'))?.analytics; } catch {}
+  const near = () => { const o = io(e => { if (e.isIntersecting) { o.disconnect(); load(); } }, { rootMargin: '800px' }); o.observe(box); };
+  if (agreed) near();
+  document.addEventListener('consent', e => { if (e.detail?.analytics) near(); });
+  new MutationObserver(() => { const f = $('iframe', box); if (f && !f.src.endsWith('theme=' + theme())) f.src = url(); })
+    .observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 }

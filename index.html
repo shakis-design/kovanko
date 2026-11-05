@@ -311,8 +311,8 @@ setTimeout(function(){window.__ok||r.classList.remove('js-ready')},6000)})(docum
 </script>
 <link rel="preload" as="image" type="image/avif" fetchpriority="high" imagesrcset="img/cine/knee-cine-front-pain-light-800.avif 800w, img/cine/knee-cine-front-pain-light.avif 1600w" imagesizes="(min-width:860px) 560px, 92vw" media="(prefers-color-scheme: light)">
 <link rel="preload" as="image" type="image/avif" fetchpriority="high" imagesrcset="img/cine/knee-cine-front-pain-dark-800.avif 800w, img/cine/knee-cine-front-pain-dark.avif 1600w" imagesizes="(min-width:860px) 560px, 92vw" media="(prefers-color-scheme: dark)">
-<script type="importmap" id="bust">{"imports": {"/kovanko/js/chapter-wipe.js": "/kovanko/js/chapter-wipe.js?v=c08aab2f", "/kovanko/js/chrome.js": "/kovanko/js/chrome.js?v=b5b0335b", "/kovanko/js/cookie.js": "/kovanko/js/cookie.js?v=e839c785", "/kovanko/js/dom.js": "/kovanko/js/dom.js?v=fffbe402", "/kovanko/js/form.js": "/kovanko/js/form.js?v=48a16f88", "/kovanko/js/hero-3d.js": "/kovanko/js/hero-3d.js?v=90f8627c", "/kovanko/js/hero-cine.js": "/kovanko/js/hero-cine.js?v=0f63a38c", "/kovanko/js/hero-text-fx.js": "/kovanko/js/hero-text-fx.js?v=b1d0a183", "/kovanko/js/joints.js": "/kovanko/js/joints.js?v=334b8a76", "/kovanko/js/main.js": "/kovanko/js/main.js?v=3e6bb4cf", "/kovanko/js/page.js": "/kovanko/js/page.js?v=f889027b", "/kovanko/js/process.js": "/kovanko/js/process.js?v=270dda9c", "/kovanko/js/scales.js": "/kovanko/js/scales.js?v=a61d83af", "/kovanko/js/scene-kit.js": "/kovanko/js/scene-kit.js?v=e19d2dbe", "/kovanko/js/shoulder-a.js": "/kovanko/js/shoulder-a.js?v=43f6e0a0", "/kovanko/js/smooth-wheel.js": "/kovanko/js/smooth-wheel.js?v=b3cb6298", "/kovanko/js/ui.js": "/kovanko/js/ui.js?v=ae14d7ab", "/kovanko/vendor/three-r149.min.js": "/kovanko/vendor/three-r149.min.js?v=151d7480"}}</script>
-<link rel="stylesheet" href="css/main.css?v=b00c0ab3">
+<script type="importmap" id="bust">{"imports": {"/kovanko/js/chapter-wipe.js": "/kovanko/js/chapter-wipe.js?v=c08aab2f", "/kovanko/js/chrome.js": "/kovanko/js/chrome.js?v=b5b0335b", "/kovanko/js/cookie.js": "/kovanko/js/cookie.js?v=e839c785", "/kovanko/js/dom.js": "/kovanko/js/dom.js?v=fffbe402", "/kovanko/js/form.js": "/kovanko/js/form.js?v=48a16f88", "/kovanko/js/hero-3d.js": "/kovanko/js/hero-3d.js?v=90f8627c", "/kovanko/js/hero-cine.js": "/kovanko/js/hero-cine.js?v=0f63a38c", "/kovanko/js/hero-text-fx.js": "/kovanko/js/hero-text-fx.js?v=b1d0a183", "/kovanko/js/joints.js": "/kovanko/js/joints.js?v=334b8a76", "/kovanko/js/main.js": "/kovanko/js/main.js?v=3e6bb4cf", "/kovanko/js/page.js": "/kovanko/js/page.js?v=f889027b", "/kovanko/js/process.js": "/kovanko/js/process.js?v=270dda9c", "/kovanko/js/scales.js": "/kovanko/js/scales.js?v=a61d83af", "/kovanko/js/scene-kit.js": "/kovanko/js/scene-kit.js?v=e19d2dbe", "/kovanko/js/shoulder-a.js": "/kovanko/js/shoulder-a.js?v=43f6e0a0", "/kovanko/js/smooth-wheel.js": "/kovanko/js/smooth-wheel.js?v=b3cb6298", "/kovanko/js/ui.js": "/kovanko/js/ui.js?v=919f4c86", "/kovanko/vendor/three-r149.min.js": "/kovanko/vendor/three-r149.min.js?v=151d7480"}}</script>
+<link rel="stylesheet" href="css/main.css?v=cafc41cd">
 <link rel="stylesheet" href="css/hero.css?v=3f620086">
 <script>/* 3D колена: все файлы сцены качаем сразу при открытии и параллельно, с низким приоритетом (до этого шли цепочкой из 5 шагов; на GitHub это 8–12 с, 29.10). Запуск сцены по-прежнему после въезда заголовка (main.js); адреса те же, что запросит hero-3d.js, иначе браузер скачает второй раз. */
 (function(d){if(d.documentElement.dataset.hero!=='3d')return;var m=JSON.parse(d.getElementById('bust').textContent).imports,add=function(href,rel,as){var l=d.createElement('link');l.rel=rel;l.href=href;l.fetchPriority='low';if(as){l.as=as;l.crossOrigin='anonymous'}d.head.appendChild(l)};['js/hero-3d.js','js/scene-kit.js','vendor/three-r149.min.js'].forEach(function(k){for(var key in m)if(key.slice(-k.length-1)==='/'+k)add(m[key],'modulepreload')});['models/knee-z.meta.json','models/knee-z.draco.glb','models/knee-cine.draco.glb','vendor/draco/draco_wasm_wrapper.js','vendor/draco/draco_decoder.wasm'].forEach(function(u){add(u,'preload','fetch')})})(document)</script>
@@ -497,6 +497,20 @@ setTimeout(function(){window.__ok||r.classList.remove('js-ready')},6000)})(docum
       </div>
     </div>    <!-- [врач подтвердит] абзац про болезненную дугу выводить ТОЛЬКО после письменного ответа врача и вместе с ARC_CONFIRMED = true в js/shoulder-3d.js (D1 в 02-design-spec 15.10):
     <p class="joints__arc">Боль в середине подъёма руки, примерно между 60-120°, может быть связана с сухожилиями вращательной манжеты.</p> -->
+  </div>
+</section>
+
+<!-- 1б. Отзывы пациентов: официальный виджет Яндекса (бесплатный, по врачу). Грузится только после согласия на аналитику или по кнопке: внутри Яндекс Метрика (05.11) -->
+<section class="section reviews" id="reviews" aria-labelledby="reviews-h">
+  <div class="container">
+    <div class="sec-head"><h2 class="h2" id="reviews-h" data-reveal><span class="line"><span>Отзывы пациентов</span></span></h2><p class="lead" data-reveal style="--i:2">Отзывы о Вячеславе Николаевиче на Яндексе. Их пишут пациенты, сайт их не правит.</p></div>
+    <div class="yrev" id="yrev" data-src="https://reviews.yandex.ru/ugcpub/reviews-widget?app_id=reviews-widget&amp;otype=Hum&amp;object=docCojdwAB4gqZWF&amp;variant=cards">
+      <div class="yrev__ph">
+        <p>Отзывы показываются через Яндекс. При загрузке Яндекс может сохранить свои файлы куки.</p>
+        <button class="btn btn-primary" type="button" data-yrev-load>Показать отзывы</button>
+      </div>
+    </div>
+    <p class="yrev__all"><a class="act" href="https://yandex.ru/medicine/doctor/kovanko_vyacheslav_CojdwAB4gqZWF" target="_blank" rel="noopener">Все отзывы на Яндексе</a></p>
   </div>
 </section>
 

@@ -980,3 +980,11 @@ html .hero .lead:has(br){text-wrap:wrap;max-width:none} /* подзаголов�
 @media(min-width:64em){.site-nav a{white-space:nowrap}}
 @media(min-width:64em) and (max-width:1279.98px){.js-ready .site-nav,.site-nav{gap:14px}.site-nav a{font-size:.875rem}}
 @media(min-width:1280px) and (max-width:1439.98px){.js-ready .site-nav,.site-nav{gap:18px}.site-nav a{font-size:.9375rem}}
+
+/* 05.11 «Отзывы пациентов»: виджет Яндекса в рамке сайта */
+.yrev{margin-top:var(--head-gap);max-width:880px}
+.yrev iframe{display:block;width:100%;height:340px;border:0;border-radius:32px;background:var(--surface)}
+.yrev__ph{display:grid;gap:20px;justify-items:start;align-content:center;min-height:200px;padding:var(--card-pad);background:var(--surface);border:1px solid var(--line-strong);border-radius:32px}
+.yrev__ph p{max-width:var(--measure);color:var(--text-muted)}
+.yrev__all{margin-top:16px}
+.yrev.is-on+.yrev__all{display:none} /* в загруженном виджете есть своя кнопка «Все отзывы» */
