@@ -995,3 +995,7 @@ html .hero .lead:has(br){text-wrap:wrap;max-width:none} /* подзаголов�
 /* 06.11: куда уходит заявка (P1-2 юр. проверки) и русское наименование клиники (ст. 10.1 ЗоЗПП) */
 .form__to{font-size:var(--fs-small);color:var(--text-muted);margin:0 0 var(--space-3,16px)}
 .clinic__org{font-size:var(--fs-small);color:var(--text-muted);margin-top:-4px}
+
+/* 06.11: дыра между контактами и подвалом (96 + 96 px): контакты последний блок перед подвалом, оба отступа сокращены до --head-gap */
+.contacts{padding-bottom:min(var(--head-gap),32px)}
+:root[data-look=cine] .footer--cine{padding-top:min(var(--head-gap),48px)}
