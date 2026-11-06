@@ -988,3 +988,6 @@ html .hero .lead:has(br){text-wrap:wrap;max-width:none} /* подзаголов�
 .yrev__ph p{max-width:var(--measure);color:var(--text-muted)}
 .yrev__all{margin-top:16px}
 .yrev.is-on+.yrev__all{display:none} /* в загруженном виджете есть своя кнопка «Все отзывы» */
+
+/* 06.11 возрастная маркировка в подвале */
+.fage{display:inline-block;margin-left:12px;padding:0 6px;border:1px solid var(--line-strong);border-radius:4px;font-variant-numeric:tabular-nums}

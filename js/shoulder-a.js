@@ -36,7 +36,7 @@ export async function createShoulderA(o) {
         for (const [p, q2] of [[a, b], [b, c], [c, a]]) if ((p.z - z) * (q2.z - z) < 0) { const u = (z - p.z) / (q2.z - p.z); pts.push(p.x + (q2.x - p.x) * u, p.y + (q2.y - p.y) * u); }
         if (pts.length === 4) out.push(pts[0], pts[1], z, pts[2], pts[3], z); } }
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(out, 3)); return g; };
-  const draco = new DRACOLoader().setDecoderPath(o.dracoPath || 'https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+  const draco = new DRACOLoader().setDecoderPath(o.dracoPath || new URL('../vendor/draco/', import.meta.url).href) /* только свой декодер, без Google (06.11) */;
   const gl = await new Promise((ok, fail) => new GLTFLoader().setDRACOLoader(draco).parse(glb, '', ok, fail)); draco.dispose();
   // ---- кино-стиль (превью, o.cine = { kit: CINE из hero-cine.js, tissue: url мышц и кожи }): стеклянные мышцы, дымчатая кость, облако боли -> голубой ореол ----
   const K = o.cine?.kit, cineM = [], cineH = [];

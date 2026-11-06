@@ -5,6 +5,8 @@ const phoneOk = v => { const d = v.replace(/\D/g, ''); return (d.length === 11 &
 
 export function initForm() {
   const form = $('#form'), btn = $('#submit'), summary = $('#summary'), fail = $('#fail'), done = $('#done');
+  if (!form) return;
+  form.noValidate = true; // свою проверку делает скрипт; без JS браузер сам не отправит форму без имени, телефона и галочки согласия (required) (06.11)
   const rules = [
     { el: $('#f-name'), err: $('#e-name'), check: el => (el.value.trim() ? '' : 'Укажите имя') },
     { el: $('#f-tel'), err: $('#e-tel'), check: el => (!el.value.trim() ? 'Укажите телефон' : phoneOk(el.value) ? '' : 'Введите телефон полностью, например +7 900 000 00 00') },
