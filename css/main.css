@@ -991,3 +991,7 @@ html .hero .lead:has(br){text-wrap:wrap;max-width:none} /* подзаголов�
 
 /* 06.11 возрастная маркировка в подвале */
 .fage{display:inline-block;margin-left:12px;padding:0 6px;border:1px solid var(--line-strong);border-radius:4px;font-variant-numeric:tabular-nums}
+
+/* 06.11: куда уходит заявка (P1-2 юр. проверки) и русское наименование клиники (ст. 10.1 ЗоЗПП) */
+.form__to{font-size:var(--fs-small);color:var(--text-muted);margin:0 0 var(--space-3,16px)}
+.clinic__org{font-size:var(--fs-small);color:var(--text-muted);margin-top:-4px}

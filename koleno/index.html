@@ -20,7 +20,7 @@ r.dataset.theme=t=='light'?'light':'dark';r.classList.add('js-ready');
 setTimeout(function(){window.__ok||r.classList.remove('js-ready')},6000)})(document)
 </script>
 <script type="importmap" id="bust">{"imports": {"/kovanko/js/chapter-wipe.js": "/kovanko/js/chapter-wipe.js?v=c08aab2f", "/kovanko/js/chrome.js": "/kovanko/js/chrome.js?v=b5b0335b", "/kovanko/js/cookie.js": "/kovanko/js/cookie.js?v=e839c785", "/kovanko/js/dom.js": "/kovanko/js/dom.js?v=fffbe402", "/kovanko/js/form.js": "/kovanko/js/form.js?v=e0f52f30", "/kovanko/js/hero-3d.js": "/kovanko/js/hero-3d.js?v=90f8627c", "/kovanko/js/hero-cine.js": "/kovanko/js/hero-cine.js?v=0f63a38c", "/kovanko/js/hero-text-fx.js": "/kovanko/js/hero-text-fx.js?v=b1d0a183", "/kovanko/js/joints.js": "/kovanko/js/joints.js?v=334b8a76", "/kovanko/js/main.js": "/kovanko/js/main.js?v=3e6bb4cf", "/kovanko/js/page.js": "/kovanko/js/page.js?v=f889027b", "/kovanko/js/process.js": "/kovanko/js/process.js?v=270dda9c", "/kovanko/js/scales.js": "/kovanko/js/scales.js?v=a61d83af", "/kovanko/js/scene-kit.js": "/kovanko/js/scene-kit.js?v=e19d2dbe", "/kovanko/js/shoulder-a.js": "/kovanko/js/shoulder-a.js?v=3bb202ec", "/kovanko/js/smooth-wheel.js": "/kovanko/js/smooth-wheel.js?v=b3cb6298", "/kovanko/js/ui.js": "/kovanko/js/ui.js?v=919f4c86", "/kovanko/vendor/three-r149.min.js": "/kovanko/vendor/three-r149.min.js?v=151d7480"}}</script>
-<link rel="stylesheet" href="../css/main.css?v=eb0e89c0">
+<link rel="stylesheet" href="../css/main.css?v=ef335af6">
 <meta name="description" content="Приём травматолога-ортопеда в Санкт-Петербурге: разрыв связок и менисков колена, артроскопия. Есть противопоказания, нужна консультация специалиста.">
 <link rel="canonical" href="https://[домен]/koleno/">
 <meta property="og:type" content="website">
@@ -238,6 +238,7 @@ setTimeout(function(){window.__ok||r.classList.remove('js-ready')},6000)})(docum
       <form class="form" id="form" method="post" action="[endpoint]">
         <div class="summary" id="summary" role="alert" hidden></div>
         <div class="fail" id="fail" role="alert" hidden><h3 class="h3">Не отправилось</h3><p>Проверьте интернет и попробуйте снова. Или позвоните: <a href="tel:+78122202227" data-tel>+7 (812) 220-22-27</a>.</p><button class="btn btn-ghost" type="submit">Попробовать снова</button></div>
+        <p class="form__to">Заявка уходит в Braesku Rehab (ООО «Клевер Рехаб»). В СПб больницу РАН записывают только по телефону: <a href="tel:+78122222272">+7 (812) 222-22-72</a>.</p>
         <div class="field"><label for="f-name">Имя</label><input class="input" id="f-name" name="name" autocomplete="name" required aria-describedby="e-name"><span class="err" id="e-name" hidden></span></div>
         <div class="field"><label for="f-tel">Телефон</label><input class="input" id="f-tel" name="phone" type="tel" inputmode="tel" autocomplete="tel" required pattern="[+]?[0-9\s\-()]{10,18}" aria-describedby="e-tel" placeholder="+7 900 000 00 00"><span class="err" id="e-tel" hidden></span></div>
         <div class="field"><label for="f-what">Что беспокоит <span class="opt">необязательно</span></label><textarea class="input" id="f-what" name="note" rows="3" maxlength="500" aria-describedby="h-what"></textarea><span class="help" id="h-what">Коротко, без диагнозов и паспортных данных. Подробности обсудим на приёме.</span></div>
